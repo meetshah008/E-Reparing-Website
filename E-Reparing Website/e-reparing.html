@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Electric Appliance Repair Services</title>
+
+  <style>
+    :root {
+      /* Default Dark Theme */
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --text-color: white;
+      --footer-bg: #0a0f14;
+      --highlight-bg: #2a2f36;
+    }
+
+    body.light-mode {
+      /* Light Theme */
+      --bg-color: #0A0F1C;
+      --card-bg: #2F3F5B;
+      --text-color: white;
+      --footer-bg: #0F1D3B;
+      --highlight-bg: #2F3F5C;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: var(--card-bg);
+      border: none;
+      color: var(--text-color);
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .hero {
+      background: url('images/Appliance Technician at Work.png') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .appliance-section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .appliance-section h2 {
+      margin-bottom: 30px;
+    }
+
+    .area-select {
+      margin-bottom: 20px;
+    }
+
+    .area-select select,
+    .area-select input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      margin: 5px;
+    }
+
+    .appliance-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .appliance {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 10px;
+      width: 120px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      border: 1px solid var(--highlight-bg);
+    }
+
+    .appliance:hover {
+      transform: scale(1.05);
+    }
+
+    .appliance img {
+      width: 40px;
+      margin-bottom: 10px;
+    }
+
+    .problem-list {
+      margin-top: 30px;
+      text-align: left;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: var(--highlight-bg);
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .problem-list h3 {
+      margin-top: 0;
+    }
+
+    .problem-list ul li {
+      cursor: pointer;
+    }
+
+    .repairers-list {
+      margin-top: 20px;
+      background-color: var(--highlight-bg);
+      padding: 15px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .footer {
+      background-color: var(--footer-bg);
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .footer p {
+      font-size: 22px;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .footer small {
+      display: block;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    @media(max-width:786px) {
+      .hero {
+        height: 500px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <h1>Electric Appliance Repair Services</h1>
+    <p>Fast and Reliable Repairs Near You</p>
+  </section>
+
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+  <section class="appliance-section">
+    <h2>Select your city and appliance:</h2>
+
+    <div class="area-select">
+      <select id="citySelect" onchange="showAddressBox()">
+        <option value="">-- Select City in Gujarat --</option>
+        <option value="Ahmedabad">Ahmedabad</option>
+        <option value="Surat">Surat</option>
+        <option value="Vadodara">Vadodara</option>
+        <option value="Rajkot">Rajkot</option>
+        <option value="Bhavnagar">Bhavnagar</option>
+        <option value="Jamnagar">Jamnagar</option>
+        <option value="Junagadh">Junagadh</option>
+        <option value="Gandhinagar">Gandhinagar</option>
+      </select>
+      <input id="addressInput" type="text" placeholder="Enter your full address" style="display:none; width: 300px;" />
+    </div>
+
+    <div class="appliance-grid">
+      <div class="appliance" data-appliance="Washing Machine">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/washing-machine.png" alt="Washing Machine" />
+        <div>Washing Machine</div>
+      </div>
+      <div class="appliance" data-appliance="Microwave">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/microwave.png" alt="Microwave" />
+        <div>Microwave</div>
+      </div>
+      <div class="appliance" data-appliance="Fan">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/fan.png" alt="Fan" />
+        <div>Fan</div>
+      </div>
+      <div class="appliance" data-appliance="TV">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/tv.png" alt="TV" />
+        <div>TV</div>
+      </div>
+    </div>
+
+    <div class="problem-list" id="problemList">
+      <h3 id="applianceTitle"></h3>
+      <ul id="problems"></ul>
+
+      <div class="repairers-list" id="repairersList">
+        <h4>Available Repair Technicians:</h4>
+        <ul id="repairers"></ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <p>Need a quick fix?<br />We're just a click away!</p>
+    <small>&copy;2025 Electric Repair Hub | Contact: support@repairhub.com</small>
+  </div>
+
+  <script>
+    const problemsData = {
+      'Washing Machine': ['Not spinning properly', 'Water not draining', 'Strange noises during cycle', 'Door won’t open after wash'],
+      'Microwave': ['Not heating food', 'Buttons not working', 'Sparking inside', 'Turntable not spinning'],
+      'Fan': ['Not turning on', 'Unusual noise', 'Speed control not working', 'Blades are loose or broken'],
+      'TV': ['No picture or sound', 'Screen flickering', 'Remote not responding', 'HDMI ports not working']
+    };
+
+    const repairersData = {
+      'Downtown': {
+        'Washing Machine': ['Aditya mehta', 'Priya Mehta'],
+        'Microwave': ['parnaraj vaidya'],
+        'Fan': ['smit patel'],
+        'TV': ['mansi patel']
+      }
+    };
+
+    function showAddressBox() {
+      const city = document.getElementById('citySelect').value;
+      const addressInput = document.getElementById('addressInput');
+      addressInput.style.display = city ? 'inline-block' : 'none';
+    }
+
+    function showProblems(appliance) {
+      const area = 'Downtown';
+      const list = document.getElementById('problems');
+      const title = document.getElementById('applianceTitle');
+      const problemBox = document.getElementById('problemList');
+      const repairersBox = document.getElementById('repairersList');
+      const repairerList = document.getElementById('repairers');
+
+      title.textContent = `Common problems with ${appliance}`;
+      list.innerHTML = '';
+      repairersBox.style.display = 'none';
+      repairerList.innerHTML = '';
+
+      problemsData[appliance].forEach(problem => {
+        const li = document.createElement('li');
+        li.textContent = problem;
+        li.onclick = () => showRepairers(appliance, area);
+        list.appendChild(li);
+      });
+
+      problemBox.style.display = 'block';
+    }
+
+    function showRepairers(appliance, area) {
+      const repairersBox = document.getElementById('repairersList');
+      const repairerList = document.getElementById('repairers');
+      repairerList.innerHTML = '';
+
+      const areaRepairers = repairersData[area]?.[appliance] || [];
+      if (areaRepairers.length === 0) {
+        repairerList.innerHTML = '<li>No technicians available in this area.</li>';
+      } else {
+        areaRepairers.forEach(name => {
+          const li = document.createElement('li');
+          li.textContent = name;
+          repairerList.appendChild(li);
+        });
+      }
+
+      repairersBox.style.display = 'block';
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      const theme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+      localStorage.setItem('theme', theme);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Apply saved theme
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+      }
+
+      // Set appliance click handlers
+      document.querySelectorAll('.appliance').forEach(div => {
+        div.addEventListener('click', () => {
+          const appliance = div.getAttribute('data-appliance');
+          showProblems(appliance);
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
