@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Electric Appliance Repair Services</title>
+
+  <link rel="stylesheet" href="style.css">
+  <!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+</head>
+
+<body>
+
+  <section class="hero">
+    <h1>Electric Appliance Repair Services</h1>
+    <p>Fast and Reliable Repairs Near You</p>
+  </section>
+
+  <!-- Login / Register Modal -->
+<div id="authModal" class="auth-modal">
+  <div class="auth-container">
+    <div class="auth-header">
+      <div class="auth-logo">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 id="authTitle" class="auth-title">Welcome Back</h2>
+      <p class="auth-subtitle">Sign in to your account to continue</p>
+    </div>
+    
+    <form class="auth-form" id="authForm">
+      <div class="form-group" id="usernameGroup">
+        <div class="input-wrapper">
+          <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <input type="text" id="authUsername" placeholder="Enter your username" class="auth-input" />
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="input-wrapper">
+          <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <input type="email" id="authEmail" placeholder="Enter your email" class="auth-input" required />
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="input-wrapper">
+          <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="16" r="1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <input type="password" id="authPassword" placeholder="Enter your password" class="auth-input" required />
+          <button type="button" class="password-toggle" onclick="togglePassword()">
+            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 12S5 4 12 4S23 12 23 12S19 20 12 20S1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <button type="submit" id="authSubmit" class="auth-button">
+        <span class="button-text">Sign In</span>
+        <div class="button-loader" style="display: none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="31.416" stroke-dashoffset="31.416">
+              <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
+              <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
+            </svg>
+          </div>
+      </button>
+    </form>
+    
+    <div class="auth-divider">
+      <span>or</span>
+    </div>
+    
+    <div class="social-auth">
+      <button class="social-button google">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Continue with Google
+      </button>
+    </div>
+    
+    <p id="authSwitch" class="auth-switch">Don't have an account? <span class="switch-link">Sign up</span></p>
+    
+    <button onclick="closeAuthModal()" class="auth-close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Login/Register Button -->
+<div class="auth-trigger">
+  <button onclick="openAuthModal()" class="auth-trigger-button">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M10 17L15 12L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Sign In
+  </button>
+</div>
+
+
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+  <section class="appliance-section">
+    <h2>Select your city and appliance:</h2>
+
+    <div class="area-select">
+      <select id="citySelect" onchange="showAddressBox()">
+        <option value="">-- Select City in Gujarat --</option>
+        <option value="Ahmedabad">Ahmedabad</option>
+        <option value="Surat">Surat</option>
+        <option value="Vadodara">Vadodara</option>
+        <option value="Rajkot">Rajkot</option>
+        <option value="Bhavnagar">Bhavnagar</option>
+        <option value="Jamnagar">Jamnagar</option>
+        <option value="Junagadh">Junagadh</option>
+        <option value="Gandhinagar">Gandhinagar</option>
+      </select>
+      <input id="addressInput" type="text" placeholder="Enter your full address" style="display:none; width: 300px;" />
+    </div>
+
+    <div class="appliance-grid">
+      <div class="appliance" data-appliance="Washing Machine">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/washing-machine.png" alt="Washing Machine" />
+        <div>Washing Machine</div>
+      </div>
+      <div class="appliance" data-appliance="Microwave">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/microwave.png" alt="Microwave" />
+        <div>Microwave</div>
+      </div>
+      <div class="appliance" data-appliance="Fan">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/fan.png" alt="Fan" />
+        <div>Fan</div>
+      </div>
+      <div class="appliance" data-appliance="TV">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/tv.png" alt="TV" />
+        <div>TV</div>
+      </div>
+    </div>
+
+    <div class="problem-list" id="problemList">
+      <h3 id="applianceTitle"></h3>
+      <ul id="problems"></ul>
+
+      <div class="repairers-list" id="repairersList">
+        <h4>Available Repair Technicians:</h4>
+        <ul id="repairers"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- My Bookings Section -->
+  
+<section class="appliance-section">
+  <h2>📑 My Bookings</h2>
+  <div id="myBookings"
+    style="max-width:600px; margin: auto; text-align:left; background: var(--highlight-bg); padding:20px; border-radius:10px;">
+    <p>No bookings yet.</p>
+  </div>
+  <div style="text-align:center; margin-top:15px;">
+    <button onclick="clearAllBookings()" 
+      style="background:#dc2626; color:white; padding:8px 14px; border:none; border-radius:6px; cursor:pointer;">
+      ❌ Clear All Bookings
+    </button>
+  </div>
+</section>
+
+
+  <!-- Booking Popup -->
+  <div id="bookingPopup" class="booking-popup">
+    <div class="booking-box">
+      <h3 id="bookingTech"></h3>
+      <input type="text" id="custName" placeholder="Your Name" />
+      <input type="text" id="custPhone" placeholder="Your Phone" />
+      <textarea id="custProblem" placeholder="Describe Problem"></textarea>
+      <input type="text" id="custTime" placeholder="Preferred Time" />
+      <br>
+      <button class="submit-btn" onclick="submitBooking()">Submit</button>
+      <button class="close-btn" onclick="closeBooking()">Close</button>
+    </div>
+  </div>
+
+
+  <div id="map" style="height:400px; width:100%; border-radius:10px;"></div>
+
+<script src="L.map.js"></script>
+<script src="script.js"></script>  
+
+</body>
+
+</html>
